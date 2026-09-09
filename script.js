@@ -610,14 +610,7 @@ function initFeatureMenu() {
 
 /* ---------- 62 themes ---------- */
 const THEMES = [
-  "classic","peach","pink","lavender","mint","ocean","rose-dark","forest",
-  "sky","sunset","coral","lemon","aqua","teal","indigo","violet","plum",
-  "berry","cherry","coffee","sand","slate","midnight","neon","aurora","ember",
-  "grape","ice","amoled","dracula","tokyo-night","nord-dark","solar-dark",
-  "deep-ocean","cyberpunk","synthwave","matrix","crimson","royal-dark","obsidian",
-  "charcoal","cosmic","toxic","blueberry-dark","cocoa-dark","rosewood","teal-night","gold-night",
-  "glass","bento","brutalist","terminal","notebook","paper","mono","glass-dark",
-  "dashboard","arcade","blueprint","newspaper","soft-3d","editorial"
+  "bento","brutalist","mono","blueprint"
 ];
 
 function getDefaultTheme() {
