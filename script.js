@@ -827,7 +827,7 @@ function renderFocus(){
         <div class="todo-item-title">${escapeFeatureText(x.subject)} · ${escapeFeatureText(x.activity)} · ${formatMinutes(x.minutes)}</div>
         <div class="todo-item-meta"><span class="todo-tag">${x.questions||0} questions</span><span>${escapeFeatureText(x.note||"")}</span></div>
       </div>
-      <button class="todo-delete" data-focus-delete="${x.id}">🗑️</button>
+      <button class="todo-delete" data-focus-delete="${x.id}">✖</button>
     </div>`).join("");
   list.querySelectorAll("[data-focus-delete]").forEach(btn=>btn.addEventListener("click",()=>{
     saveFocusLogs(getFocusLogs().filter(x=>String(x.id)!==String(btn.dataset.focusDelete)));renderFocus();
