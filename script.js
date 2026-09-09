@@ -673,7 +673,7 @@ function renderTodoList() {
         <div class="todo-item-title">${escapeFeatureText(t.task)}</div>
         <div class="todo-item-meta"><span class="todo-tag">${escapeFeatureText(t.category)}</span><span>${t.date}</span></div>
       </div>
-      <button class="todo-delete" data-todo-delete="${t.id}">🗑️</button>
+      <button class="todo-delete" data-todo-delete="${t.id}">✖</button>
     </div>`).join("");
 
   list.querySelectorAll("[data-todo-check]").forEach(box => box.addEventListener("change", () => {
