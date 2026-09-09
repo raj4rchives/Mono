@@ -946,3 +946,190 @@ body[data-theme="mono-purple"] .primary{color:#fff!important}
   
   
 }
+
+/* =========================================================
+   THEME-SAFE COMPONENT OVERRIDES
+   Keep ALL tracker feature pages consistent with the active theme.
+   Prevents old hard-coded dark backgrounds from appearing after
+   adding TODO, Focus, PYQ, Syllabus, Weekly and Backup data.
+   ========================================================= */
+body[data-theme] .card,
+body[data-theme] .dashboard-card,
+body[data-theme] .stat,
+body[data-theme] .countdown-card,
+body[data-theme] .feature-page,
+body[data-theme] .focus-controls,
+body[data-theme] .manual-focus-card,
+body[data-theme] .todo-stat,
+body[data-theme] .focus-hero-badge,
+body[data-theme] .menu-feature-btn {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .todo-item,
+body[data-theme] .focus-item {
+  background: var(--todo-bg, var(--panel)) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] input,
+body[data-theme] select,
+body[data-theme] textarea,
+body[data-theme] .todo-form select,
+body[data-theme] .focus-fields input,
+body[data-theme] .focus-fields select {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] input::placeholder,
+body[data-theme] textarea::placeholder {
+  color: var(--muted) !important;
+}
+
+body[data-theme] .secondary,
+body[data-theme] .file-btn,
+body[data-theme] .focus-chip {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .danger {
+  background: var(--badge-bg) !important;
+  color: var(--danger-text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .badge,
+body[data-theme] .todo-tag {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .table-wrap,
+body[data-theme] table {
+  background: var(--panel) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] th {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] td {
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] tr,
+body[data-theme] tr:nth-child(even) {
+  background: var(--panel) !important;
+}
+
+body[data-theme] .summary-table .total-row,
+body[data-theme] .summary-table .total-row td {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+}
+
+body[data-theme] .sub,
+body[data-theme] .note,
+body[data-theme] .countdown-label,
+body[data-theme] .countdown-sub,
+body[data-theme] .todo-stat span,
+body[data-theme] .todo-item-meta,
+body[data-theme] .focus-hero p,
+body[data-theme] .focus-hero-badge span {
+  color: var(--muted) !important;
+}
+
+/* Keep primary controls readable in every colour variant. */
+body[data-theme] .primary {
+  background: var(--accent) !important;
+  color: var(--accent-text, #fff) !important;
+  border-color: var(--accent) !important;
+}
+
+/* Mono variants use dark text on the page and a coloured primary button. */
+body[data-theme="mono-red"] { --accent-text:#fff; }
+body[data-theme="mono-blue"] { --accent-text:#fff; }
+body[data-theme="mono-green"] { --accent-text:#fff; }
+body[data-theme="mono-purple"] { --accent-text:#fff; }
+body[data-theme="mono"] { --accent-text:#fff; }
+body[data-theme="bento"] { --accent-text:#111; }
+body[data-theme="brutalist"] { --accent-text:#fff; }
+body[data-theme="blueprint"] { --accent-text:#082f49; }
+
+/* Date/task/focus controls must never fall back to the old #0b1220/#1b2638 colors. */
+body[data-theme] .todo-toolbar button,
+body[data-theme] .todo-add-btn,
+body[data-theme] .focus-buttons button,
+body[data-theme] .focus-presets button,
+body[data-theme] .feature-close {
+  border-color: var(--line) !important;
+}
+
+/* Progress bars and focus visuals follow the selected accent. */
+body[data-theme] .progress-bar { background: var(--accent) !important; }
+body[data-theme] .focus-kicker { color: var(--accent) !important; }
+
+/* ===== 10 NEW DISTINCT THEMES ===== */
+.theme-glass{background:linear-gradient(135deg,#dbeafe,#c4b5fd,#f0abfc)}
+.theme-neo{background:linear-gradient(135deg,#ffdf00,#ff5a36)}
+.theme-aurora{background:linear-gradient(135deg,#071a2b,#14b8a6,#8b5cf6)}
+.theme-paper{background:linear-gradient(135deg,#f5f0e6,#d8c9ad)}
+.theme-terminal{background:linear-gradient(135deg,#06130b,#22c55e)}
+.theme-sunset{background:linear-gradient(135deg,#ff7a59,#fbbf24,#ec4899)}
+.theme-ocean{background:linear-gradient(135deg,#082f49,#0284c7,#22d3ee)}
+.theme-candy{background:linear-gradient(135deg,#f9a8d4,#c4b5fd,#93c5fd)}
+.theme-clay{background:linear-gradient(135deg,#ead7c7,#c49a7c)}
+.theme-cyber{background:linear-gradient(135deg,#050014,#7c3aed,#06b6d4)}
+
+body[data-theme="glass"]{--bg:#e9e7ff;--panel:rgba(255,255,255,.72);--line:rgba(79,70,229,.25);--text:#17152b;--muted:#625f78;--accent:#6366f1;--stat-bg:rgba(255,255,255,.58);--badge-bg:#e0e7ff;--button-bg:rgba(255,255,255,.7);--todo-bg:rgba(255,255,255,.78)}
+body[data-theme="glass"]{background:linear-gradient(135deg,#e0e7ff,#fae8ff);background-attachment:fixed}
+body[data-theme="glass"] .card,body[data-theme="glass"] .stat,body[data-theme="glass"] .dashboard-card,body[data-theme="glass"] .countdown-card,body[data-theme="glass"] .feature-page{backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.75);box-shadow:0 18px 45px rgba(79,70,229,.12);border-radius:22px}
+
+body[data-theme="neo"]{--bg:#fff7cc;--panel:#fffef5;--line:#111;--text:#111;--muted:#4b4b3f;--accent:#ff5a36;--stat-bg:#ffe94a;--badge-bg:#fff;--button-bg:#fff;--todo-bg:#fffef5}
+body[data-theme="neo"] .card,body[data-theme="neo"] .stat,body[data-theme="neo"] .dashboard-card,body[data-theme="neo"] .countdown-card,body[data-theme="neo"] .feature-page{border:3px solid #111;border-radius:18px;box-shadow:7px 7px 0 #111}
+body[data-theme="neo"] button{border:2px solid #111;border-radius:12px;box-shadow:3px 3px 0 #111}
+
+body[data-theme="aurora"]{--bg:#071827;--panel:rgba(11,39,55,.88);--line:#24546a;--text:#ecfeff;--muted:#9cc9d0;--accent:#2dd4bf;--stat-bg:#0d3040;--badge-bg:#164e63;--button-bg:#12394a;--todo-bg:#0d3040}
+body[data-theme="aurora"]{background:radial-gradient(circle at 15% 10%,rgba(20,184,166,.25),transparent 30%),radial-gradient(circle at 85% 20%,rgba(139,92,246,.28),transparent 30%),#071827;background-attachment:fixed}
+body[data-theme="aurora"] .card,body[data-theme="aurora"] .stat,body[data-theme="aurora"] .dashboard-card,body[data-theme="aurora"] .feature-page{border-color:#24546a;border-radius:18px;box-shadow:0 15px 40px rgba(0,0,0,.2)}
+
+body[data-theme="paper"]{--bg:#e9e0cf;--panel:#fffaf0;--line:#5b4636;--text:#2d241e;--muted:#756253;--accent:#a65f35;--stat-bg:#f3eadb;--badge-bg:#e5d4bd;--button-bg:#fffaf0;--todo-bg:#fffaf0}
+body[data-theme="paper"] .card,body[data-theme="paper"] .stat,body[data-theme="paper"] .dashboard-card,body[data-theme="paper"] .feature-page{border:1px solid #8b735f;border-radius:4px;box-shadow:4px 5px 0 rgba(91,70,54,.16)}
+
+body[data-theme="terminal"]{--bg:#07100a;--panel:#0b180e;--line:#1d6b37;--text:#b9f6c7;--muted:#69a978;--accent:#22c55e;--stat-bg:#0e2113;--badge-bg:#12391e;--button-bg:#0e2113;--todo-bg:#0e2113}
+body[data-theme="terminal"]{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#07100a}
+body[data-theme="terminal"] .card,body[data-theme="terminal"] .stat,body[data-theme="terminal"] .dashboard-card,body[data-theme="terminal"] .feature-page{border:1px solid #1d6b37;border-radius:2px;box-shadow:0 0 22px rgba(34,197,94,.06)}
+
+body[data-theme="sunset"]{--bg:#fff0eb;--panel:#fffaf8;--line:#f2a38e;--text:#3b1820;--muted:#80545c;--accent:#ed5a45;--stat-bg:#ffe4dc;--badge-bg:#ffd0c4;--button-bg:#fffaf8;--todo-bg:#fffaf8}
+body[data-theme="sunset"] .card,body[data-theme="sunset"] .stat,body[data-theme="sunset"] .dashboard-card,body[data-theme="sunset"] .feature-page{border-color:#f2a38e;border-radius:20px;box-shadow:0 12px 30px rgba(237,90,69,.1)}
+
+body[data-theme="ocean"]{--bg:#e8f8ff;--panel:#f8fdff;--line:#72cce8;--text:#082f49;--muted:#416b7c;--accent:#0284c7;--stat-bg:#dff5ff;--badge-bg:#c7effc;--button-bg:#f8fdff;--todo-bg:#f8fdff}
+body[data-theme="ocean"]{background:linear-gradient(180deg,#dff6ff,#f8fdff)}
+body[data-theme="ocean"] .card,body[data-theme="ocean"] .stat,body[data-theme="ocean"] .dashboard-card,body[data-theme="ocean"] .feature-page{border-color:#72cce8;border-radius:16px}
+
+body[data-theme="candy"]{--bg:#fff0f8;--panel:#fffafd;--line:#e7b5d4;--text:#3d2440;--muted:#806681;--accent:#db5da4;--stat-bg:#ffe6f3;--badge-bg:#f6d3e6;--button-bg:#fffafd;--todo-bg:#fffafd}
+body[data-theme="candy"] .card,body[data-theme="candy"] .stat,body[data-theme="candy"] .dashboard-card,body[data-theme="candy"] .feature-page{border-color:#e7b5d4;border-radius:24px;box-shadow:0 12px 32px rgba(219,93,164,.1)}
+
+body[data-theme="clay"]{--bg:#eadfd6;--panel:#f8eee6;--line:#b98f77;--text:#3d2920;--muted:#795f51;--accent:#b86b45;--stat-bg:#f0dfd1;--badge-bg:#e2c9b7;--button-bg:#f8eee6;--todo-bg:#f8eee6}
+body[data-theme="clay"] .card,body[data-theme="clay"] .stat,body[data-theme="clay"] .dashboard-card,body[data-theme="clay"] .feature-page{border:0;border-radius:24px;box-shadow:8px 8px 18px rgba(126,88,67,.16),-5px -5px 12px rgba(255,255,255,.7)}
+
+body[data-theme="cyber"]{--bg:#090516;--panel:#120a21;--line:#5b21b6;--text:#f3e8ff;--muted:#b99ad9;--accent:#22d3ee;--stat-bg:#190d2b;--badge-bg:#27113e;--button-bg:#190d2b;--todo-bg:#190d2b}
+body[data-theme="cyber"]{background:radial-gradient(circle at 50% 0%,rgba(124,58,237,.3),transparent 38%),#090516;background-attachment:fixed}
+body[data-theme="cyber"] .card,body[data-theme="cyber"] .stat,body[data-theme="cyber"] .dashboard-card,body[data-theme="cyber"] .feature-page{border:1px solid #5b21b6;border-radius:10px;box-shadow:0 0 25px rgba(34,211,238,.08)}
+body[data-theme="cyber"] .primary{color:#041014!important}
+
+/* Make the theme picker itself match every selected theme. */
+body[data-theme] .theme-option{background:var(--panel);color:var(--text);border-color:var(--line)}
+body[data-theme] .theme-option.active{box-shadow:0 0 0 2px var(--accent) inset}

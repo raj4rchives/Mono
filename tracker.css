@@ -946,3 +946,137 @@ body[data-theme="mono-purple"] .primary{color:#fff!important}
   
   
 }
+
+/* =========================================================
+   THEME-SAFE COMPONENT OVERRIDES
+   Keep ALL tracker feature pages consistent with the active theme.
+   Prevents old hard-coded dark backgrounds from appearing after
+   adding TODO, Focus, PYQ, Syllabus, Weekly and Backup data.
+   ========================================================= */
+body[data-theme] .card,
+body[data-theme] .dashboard-card,
+body[data-theme] .stat,
+body[data-theme] .countdown-card,
+body[data-theme] .feature-page,
+body[data-theme] .focus-controls,
+body[data-theme] .manual-focus-card,
+body[data-theme] .todo-stat,
+body[data-theme] .focus-hero-badge,
+body[data-theme] .menu-feature-btn {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .todo-item,
+body[data-theme] .focus-item {
+  background: var(--todo-bg, var(--panel)) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] input,
+body[data-theme] select,
+body[data-theme] textarea,
+body[data-theme] .todo-form select,
+body[data-theme] .focus-fields input,
+body[data-theme] .focus-fields select {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] input::placeholder,
+body[data-theme] textarea::placeholder {
+  color: var(--muted) !important;
+}
+
+body[data-theme] .secondary,
+body[data-theme] .file-btn,
+body[data-theme] .focus-chip {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .danger {
+  background: var(--badge-bg) !important;
+  color: var(--danger-text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .badge,
+body[data-theme] .todo-tag {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] .table-wrap,
+body[data-theme] table {
+  background: var(--panel) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] th {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] td {
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+
+body[data-theme] tr,
+body[data-theme] tr:nth-child(even) {
+  background: var(--panel) !important;
+}
+
+body[data-theme] .summary-table .total-row,
+body[data-theme] .summary-table .total-row td {
+  background: var(--badge-bg) !important;
+  color: var(--text) !important;
+}
+
+body[data-theme] .sub,
+body[data-theme] .note,
+body[data-theme] .countdown-label,
+body[data-theme] .countdown-sub,
+body[data-theme] .todo-stat span,
+body[data-theme] .todo-item-meta,
+body[data-theme] .focus-hero p,
+body[data-theme] .focus-hero-badge span {
+  color: var(--muted) !important;
+}
+
+/* Keep primary controls readable in every colour variant. */
+body[data-theme] .primary {
+  background: var(--accent) !important;
+  color: var(--accent-text, #fff) !important;
+  border-color: var(--accent) !important;
+}
+
+/* Mono variants use dark text on the page and a coloured primary button. */
+body[data-theme="mono-red"] { --accent-text:#fff; }
+body[data-theme="mono-blue"] { --accent-text:#fff; }
+body[data-theme="mono-green"] { --accent-text:#fff; }
+body[data-theme="mono-purple"] { --accent-text:#fff; }
+body[data-theme="mono"] { --accent-text:#fff; }
+body[data-theme="bento"] { --accent-text:#111; }
+body[data-theme="brutalist"] { --accent-text:#fff; }
+body[data-theme="blueprint"] { --accent-text:#082f49; }
+
+/* Date/task/focus controls must never fall back to the old #0b1220/#1b2638 colors. */
+body[data-theme] .todo-toolbar button,
+body[data-theme] .todo-add-btn,
+body[data-theme] .focus-buttons button,
+body[data-theme] .focus-presets button,
+body[data-theme] .feature-close {
+  border-color: var(--line) !important;
+}
+
+/* Progress bars and focus visuals follow the selected accent. */
+body[data-theme] .progress-bar { background: var(--accent) !important; }
+body[data-theme] .focus-kicker { color: var(--accent) !important; }
