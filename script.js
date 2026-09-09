@@ -610,7 +610,7 @@ function initFeatureMenu() {
 
 /* ---------- 62 themes ---------- */
 const THEMES = [
-  "bento","brutalist","mono","blueprint"
+  "bento","brutalist","mono","blueprint","mono-red","mono-blue","mono-green","mono-purple"
 ];
 
 function getDefaultTheme() {
