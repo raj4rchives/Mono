@@ -1,0 +1,17 @@
+/* EXAMYWEB SMM ADAPTER — Engaging/orange.css
+   Source CSS preserved in themes/smm-source/Engaging_orange.css
+   Adapted to Mono/EXAMYWEB selectors so it can be switched safely. */
+body[data-theme="smm-engaging-orange-css"] {
+  --bg: #d98c7a; --surface: #f2d0c8; --surface-2: #f2d0c8; --card: #f2d0c8;
+  --white: #ffffff; --text: #052a36; --muted: #a9adb5; --muted-2: #737983;
+  --border: #ff7a59; --border-light: #7b3827; --accent: #ff7959; --accent-text: #ffffff;
+}
+body[data-theme="smm-engaging-orange-css"] { background: var(--bg); color: var(--text); }
+body[data-theme="smm-engaging-orange-css"] header, body[data-theme="smm-engaging-orange-css"] .navbar { background: color-mix(in srgb, var(--bg) 92%, var(--accent)); border-color: var(--border); }
+body[data-theme="smm-engaging-orange-css"] .card, body[data-theme="smm-engaging-orange-css"] .panel, body[data-theme="smm-engaging-orange-css"] .stat { background: var(--card); border-color: var(--border); }
+body[data-theme="smm-engaging-orange-css"] input, body[data-theme="smm-engaging-orange-css"] select, body[data-theme="smm-engaging-orange-css"] textarea { background: var(--bg); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-engaging-orange-css"] input:focus, body[data-theme="smm-engaging-orange-css"] select:focus, body[data-theme="smm-engaging-orange-css"] textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+body[data-theme="smm-engaging-orange-css"] .btn-primary, body[data-theme="smm-engaging-orange-css"] .btn.black, body[data-theme="smm-engaging-orange-css"] .progress-bar { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+body[data-theme="smm-engaging-orange-css"] .btn-secondary, body[data-theme="smm-engaging-orange-css"] .btn.white { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-engaging-orange-css"] th { color: var(--accent); }
+body[data-theme="smm-engaging-orange-css"] a:hover, body[data-theme="smm-engaging-orange-css"] .nav-links a:hover { color: var(--accent); }

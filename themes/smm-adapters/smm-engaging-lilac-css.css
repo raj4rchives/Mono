@@ -1,0 +1,17 @@
+/* EXAMYWEB SMM ADAPTER — Engaging/lilac.css
+   Source CSS preserved in themes/smm-source/Engaging_lilac.css
+   Adapted to Mono/EXAMYWEB selectors so it can be switched safely. */
+body[data-theme="smm-engaging-lilac-css"] {
+  --bg: #1f2432; --surface: #bdcedb; --surface-2: #bdcedb; --card: #bdcedb;
+  --white: #ffffff; --text: #72c3f4; --muted: #a9adb5; --muted-2: #737983;
+  --border: #4fb4f2; --border-light: #515b78; --accent: #3f9cd5; --accent-text: #ffffff;
+}
+body[data-theme="smm-engaging-lilac-css"] { background: var(--bg); color: var(--text); }
+body[data-theme="smm-engaging-lilac-css"] header, body[data-theme="smm-engaging-lilac-css"] .navbar { background: color-mix(in srgb, var(--bg) 92%, var(--accent)); border-color: var(--border); }
+body[data-theme="smm-engaging-lilac-css"] .card, body[data-theme="smm-engaging-lilac-css"] .panel, body[data-theme="smm-engaging-lilac-css"] .stat { background: var(--card); border-color: var(--border); }
+body[data-theme="smm-engaging-lilac-css"] input, body[data-theme="smm-engaging-lilac-css"] select, body[data-theme="smm-engaging-lilac-css"] textarea { background: var(--bg); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-engaging-lilac-css"] input:focus, body[data-theme="smm-engaging-lilac-css"] select:focus, body[data-theme="smm-engaging-lilac-css"] textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+body[data-theme="smm-engaging-lilac-css"] .btn-primary, body[data-theme="smm-engaging-lilac-css"] .btn.black, body[data-theme="smm-engaging-lilac-css"] .progress-bar { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+body[data-theme="smm-engaging-lilac-css"] .btn-secondary, body[data-theme="smm-engaging-lilac-css"] .btn.white { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-engaging-lilac-css"] th { color: var(--accent); }
+body[data-theme="smm-engaging-lilac-css"] a:hover, body[data-theme="smm-engaging-lilac-css"] .nav-links a:hover { color: var(--accent); }

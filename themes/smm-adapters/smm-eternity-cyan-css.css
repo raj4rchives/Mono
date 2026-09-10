@@ -1,0 +1,17 @@
+/* EXAMYWEB SMM ADAPTER — Eternity/cyan.css
+   Source CSS preserved in themes/smm-source/Eternity_cyan.css
+   Adapted to Mono/EXAMYWEB selectors so it can be switched safely. */
+body[data-theme="smm-eternity-cyan-css"] {
+  --bg: #e6f4f2; --surface: #68ced4; --surface-2: #68ced4; --card: #68ced4;
+  --white: #ffffff; --text: #4fb4f2; --muted: #a9adb5; --muted-2: #737983;
+  --border: #61768e; --border-light: #334e6e; --accent: #052a36; --accent-text: #ffffff;
+}
+body[data-theme="smm-eternity-cyan-css"] { background: var(--bg); color: var(--text); }
+body[data-theme="smm-eternity-cyan-css"] header, body[data-theme="smm-eternity-cyan-css"] .navbar { background: color-mix(in srgb, var(--bg) 92%, var(--accent)); border-color: var(--border); }
+body[data-theme="smm-eternity-cyan-css"] .card, body[data-theme="smm-eternity-cyan-css"] .panel, body[data-theme="smm-eternity-cyan-css"] .stat { background: var(--card); border-color: var(--border); }
+body[data-theme="smm-eternity-cyan-css"] input, body[data-theme="smm-eternity-cyan-css"] select, body[data-theme="smm-eternity-cyan-css"] textarea { background: var(--bg); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-eternity-cyan-css"] input:focus, body[data-theme="smm-eternity-cyan-css"] select:focus, body[data-theme="smm-eternity-cyan-css"] textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+body[data-theme="smm-eternity-cyan-css"] .btn-primary, body[data-theme="smm-eternity-cyan-css"] .btn.black, body[data-theme="smm-eternity-cyan-css"] .progress-bar { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+body[data-theme="smm-eternity-cyan-css"] .btn-secondary, body[data-theme="smm-eternity-cyan-css"] .btn.white { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-eternity-cyan-css"] th { color: var(--accent); }
+body[data-theme="smm-eternity-cyan-css"] a:hover, body[data-theme="smm-eternity-cyan-css"] .nav-links a:hover { color: var(--accent); }

@@ -1,0 +1,17 @@
+/* EXAMYWEB SMM ADAPTER — Engaging/bootstrap.css
+   Source CSS preserved in themes/smm-source/Engaging_bootstrap.css
+   Adapted to Mono/EXAMYWEB selectors so it can be switched safely. */
+body[data-theme="smm-engaging-bootstrap-css"] {
+  --bg: #212529; --surface: #dc3545; --surface-2: #dc3545; --card: #dc3545;
+  --white: #ffffff; --text: #dee2e6; --muted: #a9adb5; --muted-2: #737983;
+  --border: #28a745; --border-light: #007bff; --accent: #6c757d; --accent-text: #ffffff;
+}
+body[data-theme="smm-engaging-bootstrap-css"] { background: var(--bg); color: var(--text); }
+body[data-theme="smm-engaging-bootstrap-css"] header, body[data-theme="smm-engaging-bootstrap-css"] .navbar { background: color-mix(in srgb, var(--bg) 92%, var(--accent)); border-color: var(--border); }
+body[data-theme="smm-engaging-bootstrap-css"] .card, body[data-theme="smm-engaging-bootstrap-css"] .panel, body[data-theme="smm-engaging-bootstrap-css"] .stat { background: var(--card); border-color: var(--border); }
+body[data-theme="smm-engaging-bootstrap-css"] input, body[data-theme="smm-engaging-bootstrap-css"] select, body[data-theme="smm-engaging-bootstrap-css"] textarea { background: var(--bg); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-engaging-bootstrap-css"] input:focus, body[data-theme="smm-engaging-bootstrap-css"] select:focus, body[data-theme="smm-engaging-bootstrap-css"] textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+body[data-theme="smm-engaging-bootstrap-css"] .btn-primary, body[data-theme="smm-engaging-bootstrap-css"] .btn.black, body[data-theme="smm-engaging-bootstrap-css"] .progress-bar { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+body[data-theme="smm-engaging-bootstrap-css"] .btn-secondary, body[data-theme="smm-engaging-bootstrap-css"] .btn.white { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+body[data-theme="smm-engaging-bootstrap-css"] th { color: var(--accent); }
+body[data-theme="smm-engaging-bootstrap-css"] a:hover, body[data-theme="smm-engaging-bootstrap-css"] .nav-links a:hover { color: var(--accent); }
