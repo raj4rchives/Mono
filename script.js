@@ -612,8 +612,7 @@ function initFeatureMenu() {
 const THEMES = [
   "bento","brutalist","mono","blueprint","mono-red","mono-blue","mono-green","mono-purple",
   "bento-coral","bento-mint","bento-lavender","bento-ocean","bento-sunset",
-  "brutalist-blue","brutalist-green","brutalist-purple","brutalist-orange","brutalist-pink",
-  "diamond"
+  "brutalist-blue","brutalist-green","brutalist-purple","brutalist-orange","brutalist-pink"
 ];
 
 function getDefaultTheme() {
