@@ -609,11 +609,14 @@ function initFeatureMenu() {
 }
 
 /* ---------- 62 themes ---------- */
-const THEMES = [
+const CORE_THEMES = [
   "bento","brutalist","mono","blueprint","mono-red","mono-blue","mono-green","mono-purple",
   "bento-coral","bento-mint","bento-lavender","bento-ocean","bento-sunset",
   "brutalist-blue","brutalist-green","brutalist-purple","brutalist-orange","brutalist-pink"
 ];
+const SMM_THEME_META = Array.isArray(window.EXAMY_SMM_THEME_META) ? window.EXAMY_SMM_THEME_META : [];
+const SMM_THEMES = SMM_THEME_META.map(x => x.key);
+const THEMES = [...CORE_THEMES, ...SMM_THEMES];
 
 function getDefaultTheme() {
   const meta = document.querySelector('meta[name="tracker-default-theme"]');
@@ -624,6 +627,7 @@ function getDefaultTheme() {
 function applyTheme(theme, persist = true) {
   if (!THEMES.includes(theme)) theme = getDefaultTheme();
   document.body.dataset.theme = theme;
+  if (window.loadSmmTheme) window.loadSmmTheme(SMM_THEMES.includes(theme) ? theme : "");
   if (persist) localStorage.setItem(THEME_KEY, theme);
   updateThemeButtons();
 }
@@ -635,9 +639,15 @@ function updateThemeButtons() {
   });
 }
 function initThemes() {
-  // The editable default is controlled from index.html/tracker.html:
-  // <meta name="tracker-default-theme" content="mono">
-  // Saved user selection still wins after the user manually changes theme.
+  const grid = document.getElementById("smmThemeGrid");
+  if (grid && SMM_THEME_META.length) {
+    grid.innerHTML = SMM_THEME_META.map(x => {
+      const label = x.name.replace(/^Engaging\//i, "").replace(/^Eternity\//i, "").replace(/^asd\//i, "ASD /").replace(/\.css$/i, "");
+      const dot = (x.palette && x.palette[0]) || "#777";
+      const dot2 = (x.palette && x.palette[1]) || dot;
+      return `<button class="theme-option smm-theme-option" data-theme="${escapeFeatureText(x.key)}" title="${escapeFeatureText(x.name)}"><span class="theme-dot" style="background:linear-gradient(135deg, ${dot}, ${dot2})"></span><b>${escapeFeatureText(label)}</b><small>SMM</small></button>`;
+    }).join("");
+  }
   const saved = localStorage.getItem(THEME_KEY);
   applyTheme(saved && THEMES.includes(saved) ? saved : getDefaultTheme(), false);
   document.querySelectorAll(".theme-option").forEach(btn => {
