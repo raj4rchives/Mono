@@ -56,7 +56,48 @@
         <button class="secondary feature-close" id="featureClose" type="button" onclick="closeFeature()">✕</button>
       </div>
 
-      <div id="menuView" class="feature-view">
+      <div id="menuView" class="feature-view smm-menu-view">
+        <div class="smm-menu-brand">
+          <div class="smm-brand-mark">◆</div>
+          <div>
+            <strong>370R <span>JEE TRACKER</span></strong>
+            <small>STUDY CONTROL CENTER</small>
+          </div>
+        </div>
+
+        <button class="smm-progress-select" type="button" data-open-feature="weekly">
+          <span>≈ <b>JEE Progress</b></span><span class="smm-chevron">⌄</span>
+        </button>
+
+        <div class="smm-menu-links">
+          <button class="menu-feature-btn" data-open-feature="syllabus">
+            <span class="smm-icon">🛒</span><div><b>New Study Plan</b><small>Set chapters & lecture targets</small></div>
+          </button>
+          <button class="menu-feature-btn" data-open-feature="pyq">
+            <span class="smm-icon">▣</span><div><b>PYQ Questions</b><small>Track chapter-wise PYQs</small></div>
+          </button>
+          <button class="menu-feature-btn" data-open-feature="todo">
+            <span class="smm-icon">☷</span><div><b>Daily TODO</b><small>Today's study tasks</small></div>
+          </button>
+          <button class="menu-feature-btn" data-open-feature="focus">
+            <span class="smm-icon">◉</span><div><b>Focus Mode</b><small>Log your study hours</small></div>
+          </button>
+          <button class="menu-feature-btn" data-open-feature="weekly">
+            <span class="smm-icon">♧</span><div><b>Weekly Report</b><small>Questions, lectures & focus</small></div>
+          </button>
+          <button class="menu-feature-btn" data-open-feature="themes">
+            <span class="smm-icon">◈</span><div><b>Themes</b><small>Change your tracker appearance</small></div>
+          </button>
+          <button class="menu-feature-btn" data-open-feature="backup">
+            <span class="smm-icon">▣</span><div><b>Backup & Import</b><small>Export or restore your tracker</small></div>
+          </button>
+        </div>
+
+        <div class="smm-menu-account">Account</div>
+        <button class="smm-account-btn" type="button" onclick="closeFeature()">⌁ <span>Close Menu</span></button>
+      </div>
+
+      <div id="legacyMenuView" class="feature-view" hidden>
         <button class="menu-feature-btn" data-open-feature="syllabus">
           <span>➔</span><div><b>Syllabus Tracker</b><small>Add chapter + total lectures → print A4 tracker</small></div>
         </button>
@@ -140,6 +181,7 @@
           <button class="theme-option" data-theme="brutalist"><span class="theme-dot theme-brutalist"></span><b>Brutalist</b></button>
           <button class="theme-option" data-theme="mono"><span class="theme-dot theme-mono"></span><b>Mono</b></button>
           <button class="theme-option" data-theme="blueprint"><span class="theme-dot theme-blueprint"></span><b>Blueprint</b></button>
+          <button class="theme-option diamond-theme-option" data-theme="diamond"><span class="theme-dot theme-diamond"></span><b>Diamond</b></button>
           <button class="theme-option" data-theme="mono-red"><span class="theme-dot theme-mono-red"></span><b>Mono Red</b></button>
           <button class="theme-option" data-theme="mono-blue"><span class="theme-dot theme-mono-blue"></span><b>Mono Blue</b></button>
           <button class="theme-option" data-theme="mono-green"><span class="theme-dot theme-mono-green"></span><b>Mono Green</b></button>
