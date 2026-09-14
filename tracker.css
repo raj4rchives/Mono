@@ -1123,3 +1123,25 @@ body[data-theme^="brutalist-"] .card,body[data-theme^="brutalist-"] .stat,body[d
 body[data-theme^="brutalist-"] button{border:2px solid var(--line);border-radius:0;box-shadow:3px 3px 0 var(--line)}
 body[data-theme^="brutalist-"] input,body[data-theme^="brutalist-"] select,body[data-theme^="brutalist-"] textarea{border:2px solid var(--line);border-radius:0;background:#fff;color:var(--text)}
 body[data-theme^="brutalist-"] h1{font-weight:1000;text-transform:uppercase}
+
+/* ===== TEST TRACKER ===== */
+.tests-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.tests-form{display:grid;grid-template-columns:190px minmax(260px,1fr) 150px auto;gap:10px;align-items:end;margin-bottom:12px;padding:12px}
+.tests-form input,.tests-form textarea{width:100%;box-sizing:border-box}
+.tests-form textarea{resize:vertical;min-height:40px;font:inherit}
+.test-help{margin:12px 0;padding:11px 13px;border:1px dashed var(--line);border-radius:11px;color:var(--muted);font-size:12px;line-height:1.5}
+.test-help b{color:var(--text)}
+.tests-list{display:flex;flex-direction:column;gap:14px}
+.tests-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.tests-table{width:100%;border-collapse:collapse;min-width:1000px;table-layout:fixed}
+.tests-table th,.tests-table td{border:1px solid var(--line);padding:7px}
+.tests-table th{background:var(--stat-bg,#0d1422);color:var(--accent);font-size:10px;text-align:center}
+.tests-table td{background:var(--panel);vertical-align:middle}
+.test-index{width:55px;text-align:center;font-weight:800}
+.test-name-col{width:170px;font-weight:800}
+.test-syllabus-col{width:240px;white-space:pre-wrap;word-break:break-word}
+.test-total{width:75px;text-align:center}
+.test-rev{width:70px;text-align:center}
+.test-action{width:75px;text-align:center}
+.test-action .pyq-delete{display:inline-flex;align-items:center;justify-content:center;min-width:58px;cursor:pointer}
+@media(max-width:800px){.tests-form{grid-template-columns:1fr}.tests-table{min-width:900px}}
