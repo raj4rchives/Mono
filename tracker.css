@@ -1145,3 +1145,28 @@ body[data-theme^="brutalist-"] h1{font-weight:1000;text-transform:uppercase}
 .test-action{width:75px;text-align:center}
 .test-action .pyq-delete{display:inline-flex;align-items:center;justify-content:center;min-width:58px;cursor:pointer}
 @media(max-width:800px){.tests-form{grid-template-columns:1fr}.tests-table{min-width:900px}}
+
+/* =========================================================
+   14-DAY PROGRESS CHECKLIST
+   ========================================================= */
+.planner14-form{overflow:hidden}
+.planner14-intro{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.planner14-intro b{font-size:18px}
+.planner14-intro span,.planner14-help{font-size:12px;color:var(--muted);line-height:1.5}
+.planner14-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.planner14-actions{display:flex;gap:9px;flex-wrap:wrap}
+.planner14-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.planner14-table{width:100%;min-width:900px;border-collapse:collapse}
+.planner14-table th,.planner14-table td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px;text-align:center}
+.planner14-table th{background:#151f31;color:#ffe600;font-size:11px}
+.planner14-table th small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.planner14-table td{background:var(--panel);height:54px}
+.planner14-table tr:nth-child(even) td{background:#0d1420}
+.planner14-table input{min-width:70px;text-align:center}
+.planner14-table input[type=number]{appearance:textfield}
+.planner14-help{margin:8px 2px 16px}
+@media(max-width:700px){
+  .planner14-toolbar{align-items:stretch}
+  .planner14-actions{width:100%}
+  .planner14-actions button{flex:1}
+}

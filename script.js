@@ -1522,3 +1522,132 @@ function initBackup(){
     e.target.value="";
   });
 }
+
+/* =========================================================
+   14-DAY PROGRESS CHECKLIST
+   Separate localStorage data; designed for printable/offline ticking.
+   ========================================================= */
+const PLANNER14_KEY = "jee370r14DayPlannerV1";
+
+function planner14DefaultData(){
+  return Array.from({length:14}, (_,i)=>({
+    day: "Day " + (i+1), lectures:"", hw:"", dpp:"", illu:"", questions:"", rev:""
+  }));
+}
+
+function planner14Load(){
+  try{
+    const x=JSON.parse(localStorage.getItem(PLANNER14_KEY)||"null");
+    return Array.isArray(x) && x.length===14 ? x : planner14DefaultData();
+  }catch(e){ return planner14DefaultData(); }
+}
+
+function planner14Save(show=false){
+  const rows=[...document.querySelectorAll("#planner14Tbody tr")].map(tr=>{
+    const get=k=>tr.querySelector(`[data-p14="${k}"]`)?.value||"";
+    return {day:get("day"),lectures:get("lectures"),hw:get("hw"),dpp:get("dpp"),illu:get("illu"),questions:get("questions"),rev:get("rev")};
+  });
+  localStorage.setItem(PLANNER14_KEY,JSON.stringify(rows));
+  if(show) alert("14-day planner saved on this device.");
+}
+
+function planner14Render(){
+  const tbody=document.getElementById("planner14Tbody");
+  if(!tbody) return;
+  const data=planner14Load();
+  tbody.innerHTML=data.map((r,i)=>`
+    <tr>
+      <td><input data-p14="day" type="text" value="${String(r.day||"Day "+(i+1)).replace(/"/g,'&quot;')}" maxlength="20"></td>
+      <td><input data-p14="lectures" type="number" min="0" max="30" step="1" value="${r.lectures||""}" placeholder="0"></td>
+      <td><input data-p14="hw" type="number" min="0" max="20" step="1" value="${r.hw||""}" placeholder="0"></td>
+      <td><input data-p14="dpp" type="number" min="0" max="20" step="1" value="${r.dpp||""}" placeholder="0"></td>
+      <td><input data-p14="illu" type="number" min="0" max="20" step="1" value="${r.illu||""}" placeholder="0"></td>
+      <td><input data-p14="questions" type="number" min="0" max="2000" step="1" value="${r.questions||""}" placeholder="0"></td>
+      <td><input data-p14="rev" type="number" min="0" max="10" step="1" value="${r.rev||""}" placeholder="1"></td>
+    </tr>`).join("");
+  tbody.querySelectorAll("input").forEach(x=>x.addEventListener("input",()=>planner14Save(false)));
+}
+
+function planner14Boxes(n){
+  n=Math.max(0,Number(n)||0);
+  return "□ ".repeat(n).trim() || "—";
+}
+function planner14QuestionBoxes(q){
+  q=Math.max(0,Number(q)||0);
+  const blocks=Math.floor(q/10);
+  const rem=q%10;
+  let out=planner14Boxes(blocks);
+  if(rem) out += (out==="—"?"":" ")+"□";
+  return out;
+}
+
+function planner14MakePDF(){
+  const jsPDFLib=window.jspdf ? window.jspdf.jsPDF : window.jsPDF;
+  if(!jsPDFLib){alert("PDF library missing.");return;}
+  planner14Save(false);
+  const data=planner14Load();
+  const pdf=new jsPDFLib({orientation:"portrait",unit:"mm",format:"a4"});
+  pdf.setFont("helvetica","bold");
+  pdf.setFontSize(16);
+  pdf.text("14-DAY JEE PROGRESS CHECKLIST",14,12);
+  pdf.setFontSize(8);
+  pdf.setFont("helvetica","normal");
+  pdf.text("Offline printable checklist • Tick each square after completing the target.",14,17);
+
+  const body=data.map((r,i)=>{
+    const n=v=>Math.max(0,Number(v)||0);
+    return [
+      r.day || "Day "+(i+1),
+      `${n(r.lectures)} lec\n${planner14Boxes(n(r.lectures))}`,
+      `${n(r.hw)} task\n${planner14Boxes(n(r.hw))}`,
+      `${n(r.dpp)} task\n${planner14Boxes(n(r.dpp))}`,
+      `${n(r.illu)} task\n${planner14Boxes(n(r.illu))}`,
+      `${n(r.questions)} Q\n${planner14QuestionBoxes(n(r.questions))}`,
+      `${n(r.rev)||1} REV\n${planner14Boxes(n(r.rev)||1)}`
+    ];
+  });
+
+  pdf.autoTable({
+    startY:21,
+    head:[["DAY","LECTURES","HW","DPP","ILLUSTRATION","TOTAL QUESTIONS","REV"]],
+    body,
+    theme:"grid",
+    styles:{fontSize:7,cellPadding:2,halign:"center",valign:"middle",textColor:0,lineColor:120,lineWidth:.1,minCellHeight:13},
+    headStyles:{fillColor:[250,204,21],textColor:0,fontStyle:"bold",fontSize:8},
+    columnStyles:{0:{cellWidth:18},1:{cellWidth:27},2:{cellWidth:23},3:{cellWidth:23},4:{cellWidth:28},5:{cellWidth:40},6:{cellWidth:22}}
+  });
+  let y=(pdf.lastAutoTable?.finalY||190)+7;
+  pdf.setFontSize(8); pdf.setFont("helvetica","bold");
+  pdf.text("Manual use: tick the printed □ squares offline. Questions are grouped as 10 questions = 1 checklist block.",14,y);
+  pdf.setFont("helvetica","normal");
+  pdf.text("REV has one dedicated revision checklist per day.",14,y+4);
+  pdf.save("14-DAY-JEE-PROGRESS-CHECKLIST.pdf");
+}
+
+function planner14Clear(){
+  if(!confirm("Clear the 14-day planner?")) return;
+  localStorage.removeItem(PLANNER14_KEY);
+  planner14Render();
+}
+
+/* Integrate with the existing feature-page navigation without changing other features. */
+(function(){
+  const oldOpenFeature=window.openFeature;
+  window.openFeature=function(name){
+    if(name==="planner14"){
+      document.getElementById("featureOverlay").hidden=false;
+      document.querySelectorAll(".feature-view").forEach(v=>v.hidden=true);
+      const v=document.getElementById("planner14View"); if(v) v.hidden=false;
+      const title=document.getElementById("featurePageTitle"); if(title) title.textContent="14-Day Progress Checklist";
+      planner14Render();
+      return;
+    }
+    if(typeof oldOpenFeature==="function") return oldOpenFeature(name);
+  };
+})();
+document.addEventListener("DOMContentLoaded",()=>{
+  const b=id=>document.getElementById(id);
+  if(b("planner14BackBtn")) b("planner14BackBtn").onclick=()=>window.openFeature("menu");
+  if(b("planner14PdfBtn")) b("planner14PdfBtn").onclick=planner14MakePDF;
+  if(b("planner14ClearBtn")) b("planner14ClearBtn").onclick=planner14Clear;
+});

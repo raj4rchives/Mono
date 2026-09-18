@@ -84,6 +84,9 @@
         <button class="menu-feature-btn" data-open-feature="weekly">
           <span>➔</span><div><b>Weekly Report</b><small>Questions • Lectures • Focus time chart</small></div>
         </button>
+        <button class="menu-feature-btn" data-open-feature="planner14">
+          <span>➔</span><div><b>14-Day Progress Checklist</b><small>Lectures • HW • DPP • Illustration • Questions • Revision → offline A4 PDF</small></div>
+        </button>
       </div>
 
       <div id="syllabusView" class="feature-view" hidden>
@@ -159,6 +162,45 @@
           <b>10 PYQs = 1 tick square.</b> Every test gets one REV square for revision. Example: 50 PYQs → 5 PYQ squares.
         </div>
         <div id="testsList" class="tests-list"></div>
+      </div>
+
+      <div id="planner14View" class="feature-view" hidden>
+        <div class="planner14-toolbar">
+          <button class="secondary" id="planner14BackBtn" type="button">← Menu</button>
+          <div class="planner14-actions">
+            <button class="secondary" id="planner14ClearBtn" type="button">Clear 14 Days</button>
+            <button class="primary" id="planner14PdfBtn" type="button">📄 Download 14-Day A4 PDF</button>
+          </div>
+        </div>
+
+        <div class="planner14-form card">
+          <div class="planner14-intro">
+            <b>14-Day Progress Checklist</b>
+            <span>Enter your target for each day. The PDF is designed for offline use — print it and tick the squares by hand.</span>
+          </div>
+          <div class="planner14-table-wrap">
+            <table class="planner14-table">
+              <thead>
+                <tr>
+                  <th>DAY</th>
+                  <th>LECTURES<br><small>1 lec = 1 □</small></th>
+                  <th>HW<br><small>□</small></th>
+                  <th>DPP<br><small>□</small></th>
+                  <th>ILLUSTRATION<br><small>□</small></th>
+                  <th>TOTAL QUESTIONS<br><small>10 Q = 1 □</small></th>
+                  <th>REV<br><small>1 □</small></th>
+                </tr>
+              </thead>
+              <tbody id="planner14Tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="planner14-help">
+          <b>PDF rule:</b> Lectures = 1 square per lecture. HW/DPP/Illustration = 1 square per planned task.
+          Total Questions = 1 square for every 10 questions (extra questions are shown in the label).
+          REV = one revision square per day.
+        </div>
       </div>
 
       <div id="themesView" class="feature-view" hidden>
