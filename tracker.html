@@ -63,6 +63,9 @@
         <button class="menu-feature-btn" data-open-feature="pyq">
           <span>➔</span><div><b>PYQ Question Tracker</b><small>Chapter-wise 10-question blocks + revision ticks</small></div>
         </button>
+        <button class="menu-feature-btn" data-open-feature="progress14">
+          <span>➔</span><div><b>14-Day Progress Checklist</b><small>Fill daily targets → print A4 checklist and tick offline</small></div>
+        </button>
         <button class="menu-feature-btn" data-open-feature="tests">
           <span>➔</span><div><b>Test Tracker</b><small>Add test name + syllabus + PYQ progress + revision</small></div>
         </button>
@@ -83,9 +86,6 @@
         </button>
         <button class="menu-feature-btn" data-open-feature="weekly">
           <span>➔</span><div><b>Weekly Report</b><small>Questions • Lectures • Focus time chart</small></div>
-        </button>
-        <button class="menu-feature-btn" data-open-feature="planner14">
-          <span>➔</span><div><b>14-Day Progress Checklist</b><small>Lectures • HW • DPP • Illustration • Questions • Revision → offline A4 PDF</small></div>
         </button>
       </div>
 
@@ -164,43 +164,24 @@
         <div id="testsList" class="tests-list"></div>
       </div>
 
-      <div id="planner14View" class="feature-view" hidden>
-        <div class="planner14-toolbar">
-          <button class="secondary" id="planner14BackBtn" type="button">← Menu</button>
-          <div class="planner14-actions">
-            <button class="secondary" id="planner14ClearBtn" type="button">Clear 14 Days</button>
-            <button class="primary" id="planner14PdfBtn" type="button">📄 Download 14-Day A4 PDF</button>
+      <div id="progress14View" class="feature-view" hidden>
+        <div class="progress14-toolbar">
+          <button class="secondary" id="progress14BackBtn" type="button">← Menu</button>
+          <div class="progress14-actions">
+            <button class="secondary" id="progress14ResetBtn" type="button">Reset 14 Days</button>
+            <button class="primary" id="progress14PdfBtn" type="button">📄 Download A4 PDF</button>
           </div>
         </div>
-
-        <div class="planner14-form card">
-          <div class="planner14-intro">
-            <b>14-Day Progress Checklist</b>
-            <span>Enter your target for each day. The PDF is designed for offline use — print it and tick the squares by hand.</span>
-          </div>
-          <div class="planner14-table-wrap">
-            <table class="planner14-table">
-              <thead>
-                <tr>
-                  <th>DAY</th>
-                  <th>LECTURES<br><small>1 lec = 1 □</small></th>
-                  <th>HW<br><small>□</small></th>
-                  <th>DPP<br><small>□</small></th>
-                  <th>ILLUSTRATION<br><small>□</small></th>
-                  <th>TOTAL QUESTIONS<br><small>10 Q = 1 □</small></th>
-                  <th>REV<br><small>1 □</small></th>
-                </tr>
-              </thead>
-              <tbody id="planner14Tbody"></tbody>
-            </table>
-          </div>
+        <div class="progress14-form card">
+          <div><b>14-Day Progress Checklist</b><small class="progress14-help">Fill the target for each day. The PDF converts each target into printable tick squares.</small></div>
         </div>
-
-        <div class="planner14-help">
-          <b>PDF rule:</b> Lectures = 1 square per lecture. HW/DPP/Illustration = 1 square per planned task.
-          Total Questions = 1 square for every 10 questions (extra questions are shown in the label).
-          REV = one revision square per day.
+        <div class="progress14-table-wrap">
+          <table class="progress14-table">
+            <thead><tr><th>DAY</th><th>TOTAL LECTURES<br><small>1 lec = 1 □</small></th><th>HW<br><small>1 = 1 □</small></th><th>DPP<br><small>1 = 1 □</small></th><th>ILLUSTRATION<br><small>1 = 1 □</small></th><th>TOTAL QUESTIONS<br><small>10 ques = 1 □</small></th><th>REV<br><small>1 □</small></th></tr></thead>
+            <tbody id="progress14Body"></tbody>
+          </table>
         </div>
+        <p class="note">PDF is intentionally a clean printable checklist: your entered numbers become empty squares (□) that you can tick with a pen after completing each task. It works offline after printing.</p>
       </div>
 
       <div id="themesView" class="feature-view" hidden>
