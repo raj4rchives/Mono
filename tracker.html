@@ -63,9 +63,6 @@
         <button class="menu-feature-btn" data-open-feature="pyq">
           <span>➔</span><div><b>PYQ Question Tracker</b><small>Chapter-wise 10-question blocks + revision ticks</small></div>
         </button>
-        <button class="menu-feature-btn" data-open-feature="progress14">
-          <span>➔</span><div><b>14-Day Progress Checklist</b><small>Fill daily targets → print A4 checklist and tick offline</small></div>
-        </button>
         <button class="menu-feature-btn" data-open-feature="tests">
           <span>➔</span><div><b>Test Tracker</b><small>Add test name + syllabus + PYQ progress + revision</small></div>
         </button>
@@ -162,26 +159,6 @@
           <b>10 PYQs = 1 tick square.</b> Every test gets one REV square for revision. Example: 50 PYQs → 5 PYQ squares.
         </div>
         <div id="testsList" class="tests-list"></div>
-      </div>
-
-      <div id="progress14View" class="feature-view" hidden>
-        <div class="progress14-toolbar">
-          <button class="secondary" id="progress14BackBtn" type="button">← Menu</button>
-          <div class="progress14-actions">
-            <button class="secondary" id="progress14ResetBtn" type="button">Reset 14 Days</button>
-            <button class="primary" id="progress14PdfBtn" type="button">📄 Download A4 PDF</button>
-          </div>
-        </div>
-        <div class="progress14-form card">
-          <div><b>14-Day Progress Checklist</b><small class="progress14-help">Fill the target for each day. The PDF converts each target into printable tick squares.</small></div>
-        </div>
-        <div class="progress14-table-wrap">
-          <table class="progress14-table">
-            <thead><tr><th>DAY</th><th>TOTAL LECTURES<br><small>1 lec = 1 □</small></th><th>HW<br><small>1 = 1 □</small></th><th>DPP<br><small>1 = 1 □</small></th><th>ILLUSTRATION<br><small>1 = 1 □</small></th><th>TOTAL QUESTIONS<br><small>10 ques = 1 □</small></th><th>REV<br><small>1 □</small></th></tr></thead>
-            <tbody id="progress14Body"></tbody>
-          </table>
-        </div>
-        <p class="note">PDF is intentionally a clean printable checklist: your entered numbers become empty squares (□) that you can tick with a pen after completing each task. It works offline after printing.</p>
       </div>
 
       <div id="themesView" class="feature-view" hidden>

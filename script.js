@@ -583,7 +583,6 @@ function openFeature(name) {
   title.textContent = titles[name] || "Menu";
   if (name === "pyq") renderPYQ();
   if (name === "tests") renderTests();
-  if (name === "progress14") renderProgress14();
   if (name === "themes") updateThemeButtons();
   if (name === "todo") renderTodoList();
   if (name === "focus") renderFocus();
@@ -1439,7 +1438,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   initSyllabus();
   initPYQ();
   initTests();
-  initProgress14();
   initThemes();
   initTodo();
   initFocus();
