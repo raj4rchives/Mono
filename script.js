@@ -1300,9 +1300,11 @@ function downloadSyllabusPDF(){
   // that could stall jsPDF before the browser got a chance to download it.
   // Build the PDF in small page-sized chunks instead.
   const pdf=new JsPDF({orientation:"portrait",unit:"mm",format:"a4",compress:true});
-  const M=7, usable=297-14;
+  const M=7, pageW=210, pageH=297, usable=pageW-M*2;
   const headers=["#","Chapter Name","Lecture Tracker","Total Lec","Lec Comp",...SYLLABUS_TASKS.map(k=>SYLLABUS_TASK_LABELS[k])];
-  const widths=[7,55,60,14,10,...SYLLABUS_TASKS.map(()=>12)];
+  // Portrait A4 has only 196 mm of usable width. Keep every column inside
+  // that boundary so the final columns (especially HW) never run off the page.
+  const widths=[5,38,45,9,7,...SYLLABUS_TASKS.map(()=>8)];
 
   let firstPage=true;
 
@@ -1348,14 +1350,14 @@ function downloadSyllabusPDF(){
       columnStyles:Object.fromEntries(
         widths.map((w,i)=>[
           i,{cellWidth:w,halign:i===1?"left":"center",
-          fontSize:i===1?10:(i===3?8:6.4),fontStyle:i===1||i===3?"bold":"normal"}
+          fontSize:i===1?7.8:(i===3?6.8:5.1),fontStyle:i===1||i===3?"bold":"normal"}
         ])
       ),
       didParseCell:data=>{
         if(data.section==="body" && data.column.index===2){
           const total=chapters[data.row.index].total;
-          const lines=Math.ceil(total/5);
-          data.cell.styles.minCellHeight=Math.max(8,lines*7.0+1.5);
+          const lines=Math.ceil(total/4);
+          data.cell.styles.minCellHeight=Math.max(8,lines*6.0+1.5);
         }
       },
       didDrawCell:data=>{
@@ -1363,24 +1365,24 @@ function downloadSyllabusPDF(){
 
         if(data.column.index===2){
           const total=chapters[data.row.index].total;
-          const perLine=5, box=4.0, step=11.0, lineH=7.0;
+          const perLine=4, box=3.0, step=9.2, lineH=6.0;
 
           for(let n=0;n<total;n++){
             const line=Math.floor(n/perLine), pos=n%perLine;
-            const x=data.cell.x+2.0+pos*step;
-            const y=data.cell.y+1.0+line*lineH;
+            const x=data.cell.x+0.7+pos*step;
+            const y=data.cell.y+0.8+line*lineH;
             if(y+box>data.cell.y+data.cell.height-0.3)continue;
 
             pdfBox(pdf,x,y,box);
             pdf.setFont("helvetica","normal");
-            pdf.setFontSize(5.2);
+            pdf.setFontSize(4.2);
             pdf.setTextColor(0,0,0);
-            pdf.text(String(n+1),x+5.2,y+3.0);
+            pdf.text(String(n+1),x+3.8,y+2.3);
           }
         }
 
         if(data.column.index>=5){
-          const box=4.0;
+          const box=3.0;
           pdfBox(
             pdf,
             data.cell.x+(data.cell.width-box)/2,
@@ -1406,7 +1408,7 @@ function downloadSyllabusPDF(){
       let startIndex=0;
 
       chapters.forEach((chapter,index)=>{
-        const h=Math.max(8,Math.ceil(chapter.total/5)*7.0+1.5);
+        const h=Math.max(8,Math.ceil(chapter.total/4)*6.0+1.5);
 
         // Flush before adding another large row.
         if(chunk.length && used+h>MAX_BODY_HEIGHT){
@@ -1425,7 +1427,7 @@ function downloadSyllabusPDF(){
       });
     }
 
-    pdf.save("JEE-Syllabus-Tracker-A4-Landscape.pdf");
+    pdf.save("JEE-Syllabus-Tracker-A4-Portrait.pdf");
   }catch(e){
     console.error("Syllabus PDF generation failed:",e);
     alert("PDF generate nahi ho paaya. Data safe hai — chapters/lectures delete nahi hue. Page reload karke dobara try karo.");
