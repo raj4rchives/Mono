@@ -1365,19 +1365,19 @@ function downloadSyllabusPDF(){
 
         if(data.column.index===2){
           const total=chapters[data.row.index].total;
-          const perLine=4, box=3.0, step=9.2, lineH=6.0;
+          const perLine=4, box=3.2, step=12.5, lineH=6.0;
 
           for(let n=0;n<total;n++){
             const line=Math.floor(n/perLine), pos=n%perLine;
-            const x=data.cell.x+0.7+pos*step;
-            const y=data.cell.y+0.8+line*lineH;
+            const x=data.cell.x+1.2+pos*step;
+            const y=data.cell.y+1.0+line*lineH;
             if(y+box>data.cell.y+data.cell.height-0.3)continue;
 
             pdfBox(pdf,x,y,box);
             pdf.setFont("helvetica","normal");
-            pdf.setFontSize(4.2);
+            pdf.setFontSize(4.0);
             pdf.setTextColor(0,0,0);
-            pdf.text(String(n+1),x+3.8,y+2.3);
+            pdf.text(String(n+1),x+4.0,y+2.4);
           }
         }
 
