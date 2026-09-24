@@ -1145,3 +1145,6 @@ body[data-theme^="brutalist-"] h1{font-weight:1000;text-transform:uppercase}
 .test-action{width:75px;text-align:center}
 .test-action .pyq-delete{display:inline-flex;align-items:center;justify-content:center;min-width:58px;cursor:pointer}
 @media(max-width:800px){.tests-form{grid-template-columns:1fr}.tests-table{min-width:900px}}
+
+/* Modular themes page includes Diamond. Add page-specific Diamond overrides here when desired. */
+body[data-theme="diamond"]{--accent:#ffffff;--panel:#101010;--line:#333;}
