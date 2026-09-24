@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EXAMYWEB — Backup & Import</title>
+<link rel="stylesheet" href="backup.css"></head><body>
+<div class="feature-page-shell">
+  <div class="feature-page-top"><div><h1>Backup & Import</h1><p>EXAMYWEB · Modular feature page</p></div><div class="feature-nav"><a href="menu.html">← Menu</a><a class="primary" href="../tracker.html">Main Tracker</a></div></div>
+  <div id="backupView" class="feature-view">
+        <div class="backup-panel">
+          <h3>💾 Backup & Import All Data</h3>
+          <p class="note">Backup includes tracker entries, TODOs, Focus logs and your selected theme. Your existing data is not changed unless you import a backup.</p>
+          <div class="backup-actions">
+            <button class="primary" id="exportJsonBtn">⬇️ Export JSON Backup</button>
+            <label class="secondary backup-import-label" for="importJsonInput">⬆️ Import JSON Backup</label>
+            <input id="importJsonInput" type="file" accept=".json,application/json" hidden>
+          </div>
+          <div class="backup-status" id="backupStatus">Ready.</div>
+        </div>
+      </div>
+</div>
+<script src="common.js"></script><script src="backup.js"></script></body></html>

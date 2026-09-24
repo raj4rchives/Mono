@@ -1,0 +1,15 @@
+
+*{box-sizing:border-box}
+body{margin:0;background:#080808;color:#eee;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+.theme-shell{max-width:1100px;margin:auto;padding:30px 20px}
+.theme-top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:25px}
+.theme-top h1{margin:0;font-size:34px}.theme-top p{color:#888;margin:5px 0}
+.theme-top a{padding:11px 15px;border:1px solid #333;border-radius:10px}
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.theme-option{min-height:100px;background:#101010;color:#fff;border:1px solid #292929;border-radius:16px;padding:16px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:12px}
+.theme-option:hover,.theme-option.active{border-color:#fff;transform:translateY(-1px)}
+.theme-dot{width:28px;height:28px;border-radius:50%;border:2px solid #555;display:block}
+.theme-mono{background:#fff}.theme-bento{background:#9c9c9c}.theme-brutalist{background:#111}.theme-blueprint{background:#2450a6}
+.theme-mono-red{background:#d33}.theme-mono-blue{background:#39f}.theme-mono-green{background:#3c6}.theme-mono-purple{background:#9a65ff}
+.theme-dot[class*="bento-"]{background:linear-gradient(135deg,#aaa,#eee)}
+.theme-dot[class*="brutalist-"]{background:#ddd}

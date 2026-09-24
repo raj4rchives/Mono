@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EXAMYWEB — Test Tracker</title>
+<link rel="stylesheet" href="tests.css"></head><body>
+<div class="feature-page-shell">
+  <div class="feature-page-top"><div><h1>Test Tracker</h1><p>EXAMYWEB · Modular feature page</p></div><div class="feature-nav"><a href="menu.html">← Menu</a><a class="primary" href="../tracker.html">Main Tracker</a></div></div>
+  <div id="testsView" class="feature-view">
+        <div class="tests-toolbar">
+          <a class="secondary feature-back-link" href="menu.html">← Menu</a>
+          <button class="secondary" id="testsClearBtn" type="button">Clear Tests</button>
+          <button class="primary" id="testsPdfBtn" type="button">📄 Download A4 PDF</button>
+        </div>
+
+        <div class="tests-form card">
+          <div><label>Test Name</label>
+            <input id="testName" type="text" maxlength="120" placeholder="e.g. Full Syllabus Test 01">
+          </div>
+          <div><label>Test Syllabus</label>
+            <textarea id="testSyllabus" maxlength="1000" rows="2" placeholder="e.g. Kinematics, NLM, Mole Concept, Quadratic Equations..."></textarea>
+          </div>
+          <div class="small"><label>Total PYQs</label>
+            <input id="testTotalQuestions" type="number" min="1" max="2000" step="1" placeholder="50">
+          </div>
+          <button class="primary" id="testAddBtn" type="button">+ Add Test</button>
+        </div>
+
+        <div class="test-help">
+          <b>10 PYQs = 1 tick square.</b> Every test gets one REV square for revision. Example: 50 PYQs → 5 PYQ squares.
+        </div>
+        <div id="testsList" class="tests-list"></div>
+      </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="common.js"></script><script src="tests.js"></script></body></html>

@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EXAMYWEB — Daily TODO</title>
+<link rel="stylesheet" href="todo.css"></head><body>
+<div class="feature-page-shell">
+  <div class="feature-page-top"><div><h1>Daily TODO</h1><p>EXAMYWEB · Modular feature page</p></div><div class="feature-nav"><a href="menu.html">← Menu</a><a class="primary" href="../tracker.html">Main Tracker</a></div></div>
+  <div id="todoView" class="feature-view">
+        <div class="todo-form">
+          <div class="small todo-date-wrap"><label>Date</label><input id="todoDate" type="date"></div>
+          <div class="todo-task-wrap"><label>Task</label><input id="todoTask" type="text" maxlength="140" placeholder="e.g. Complete Electrostatics DPP"></div>
+          <div class="todo-category-wrap"><label>Category</label>
+            <select id="todoCategory"><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>Lecture</option><option>Revision</option><option>Questions</option></select>
+          </div>
+          <button class="primary todo-add-btn" id="addTodoBtn">+ Add Task</button>
+        </div>
+        <div class="todo-toolbar">
+          <div class="todo-filter-wrap"><label>Show tasks for</label><input id="todoFilterDate" type="date"></div>
+          <button class="secondary" id="todayTodoBtn">Today</button>
+          <button class="secondary" id="todoPdfBtn">📄 Download TODO PDF</button>
+        </div>
+        <div class="todo-analysis" id="todoAnalysis">
+          <div class="todo-stat"><b id="todoTotal">0</b><span>Total</span></div>
+          <div class="todo-stat"><b id="todoCompleted">0</b><span>Completed</span></div>
+          <div class="todo-stat"><b id="todoPending">0</b><span>Pending</span></div>
+          <div class="todo-stat"><b id="todoRate">0%</b><span>Completion</span></div>
+        </div>
+        <div class="todo-list" id="todoList"><div class="todo-empty">No tasks for this date. Add your first task ✨</div></div>
+      </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="common.js"></script><script src="todo.js"></script></body></html>

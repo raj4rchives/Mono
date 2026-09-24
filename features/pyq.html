@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EXAMYWEB — PYQ Question Tracker</title>
+<link rel="stylesheet" href="pyq.css"></head><body>
+<div class="feature-page-shell">
+  <div class="feature-page-top"><div><h1>PYQ Question Tracker</h1><p>EXAMYWEB · Modular feature page</p></div><div class="feature-nav"><a href="menu.html">← Menu</a><a class="primary" href="../tracker.html">Main Tracker</a></div></div>
+  <div id="pyqView" class="feature-view">
+        <div class="pyq-toolbar">
+          <a class="secondary feature-back-link" href="menu.html">← Menu</a>
+          <div class="pyq-actions">
+            <button class="secondary" id="pyqClearBtn" type="button">Clear PYQ Tracker</button>
+            <button class="primary" id="pyqPdfBtn" type="button">📄 Download A4 PDF</button>
+          </div>
+        </div>
+
+        <div class="pyq-form card">
+          <div class="small"><label>Subject</label>
+            <select id="pyqSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>TEST</option></select>
+          </div>
+          <div class="pyq-chapter-field"><label>Chapter Name</label>
+            <input id="pyqChapterName" type="text" maxlength="100" placeholder="e.g. Motion in Straight Line">
+          </div>
+          <div class="small"><label>Total PYQs</label>
+            <input id="pyqTotalQuestions" type="number" min="1" max="1000" step="1" placeholder="50">
+          </div>
+          <button class="primary" id="pyqAddBtn" type="button">+ Add Chapter</button>
+        </div>
+
+        <div class="pyq-help">
+          <b>1 small square = 10 questions.</b>
+          Example: 50 PYQs → 5 blocks. The last block shows the actual question number.
+          <span>REV boxes are for manual revision ticks.</span>
+        </div>
+
+        <div id="pyqList" class="pyq-list"></div>
+      </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="common.js"></script><script src="pyq.js"></script></body></html>
