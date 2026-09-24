@@ -100,7 +100,7 @@
           <div class="small"><label>Total Lectures</label><input id="syllabusTotalLectures" type="number" min="1" max="100" step="1" placeholder="e.g. 13"></div>
           <button class="primary syllabus-add-btn" id="syllabusAddBtn" type="button">+ Add Chapter</button>
         </div>
-        <p class="note">Syllabus sheet अब supplied PDF format जैसा है: <b># • Chapter Name • Lecture Tracker • Total Lec • Lec Comp • Mains Level • Adv Level • Short Notes • DPP • HW</b>. Lecture और task boxes screen पर भी tick कर सकते हो और A4 PDF में filled/unfilled state preserve होगी.</p>
+        <p class="note">बस Subject, Chapter Name और Total Lectures डालो. PDF में हर lecture के लिए <b>□ L1   □ L2   □ L3...</b> और JM/Adv/MBBS/OPP/HW/Module/PYQ/Adv Prob/R1/R2/R3 के अलग boxes होंगे. A4 Landscape में print करके offline tick कर सकते हो.</p>
         <div id="syllabusList" class="syllabus-list"></div>
       </div>
 
@@ -115,7 +115,7 @@
 
         <div class="pyq-form card">
           <div class="small"><label>Subject</label>
-            <select id="pyqSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option></select>
+            <select id="pyqSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>TEST</option></select>
           </div>
           <div class="pyq-chapter-field"><label>Chapter Name</label>
             <input id="pyqChapterName" type="text" maxlength="100" placeholder="e.g. Motion in Straight Line">

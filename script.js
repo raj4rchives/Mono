@@ -877,7 +877,7 @@ function initWeeklyReport(){
 
 /* ---------- PYQ Question Tracker: chapter-wise 10-question blocks + revision ---------- */
 const PYQ_KEY = "370R_JEE_PYQ_TRACKER_V1";
-const PYQ_SUBJECTS = ["Physics","Chemistry","Mathematics"];
+const PYQ_SUBJECTS = ["Physics","Chemistry","Mathematics","TEST"];
 
 function pyqData(){
   try{
@@ -1229,108 +1229,34 @@ function downloadTestsPDF(){
   pdf.save("JEE-Test-Questions-Tracker-A4.pdf");
 }
 
-/* ---------- Syllabus Tracker: PDF-style JEE sheet ---------- */
-const SYLLABUS_KEY = "370R_JEE_SYLLABUS_V4";
+/* ---------- Syllabus Tracker: configurable chapters + A4 printable sheet ---------- */
+const SYLLABUS_KEY = "370R_JEE_SYLLABUS_V3";
 const SYLLABUS_SUBJECTS = ["Physics", "Chemistry", "Mathematics"];
-const SYLLABUS_TASKS = ["mains", "adv", "shortNotes", "dpp", "hw"];
-const SYLLABUS_TASK_LABELS = {
-  mains:"MAINS LEVEL",
-  adv:"ADV LEVEL",
-  shortNotes:"SHORT NOTES",
-  dpp:"DPP",
-  hw:"HW"
-};
+const SYLLABUS_TASKS = ["jm", "adv", "mbbs", "opp", "hw", "module", "pyq", "advProb", "r1", "r2", "r3"];
+const SYLLABUS_TASK_LABELS = {jm:"MAINS LEVEL", adv:"ADV LEVEL", mbbs:"SHORT NOTES", opp:"DPP", hw:"HW", module:"MODULE", pyq:"PYQ", advProb:"TEST", r1:"R1", r2:"R2", r3:"R3"};
 
-function normaliseSyllabusChapter(c){
-  const total=Math.max(1,Math.min(100,parseInt(c.total,10)||1));
-  const oldDone=Array.isArray(c.lecDone)?c.lecDone.map(Boolean):[];
-  const lecDone=Array.from({length:total},(_,i)=>!!oldDone[i]);
-  const tasks=Object.fromEntries(SYLLABUS_TASKS.map(k=>[
-    k, Array.isArray(c.tasks?.[k]) ? !!c.tasks[k][0] : !!c[k]
-  ]));
-  return {
-    id:String(c.id || ("ch_"+Date.now()+Math.random().toString(36).slice(2))),
-    subject:SYLLABUS_SUBJECTS.includes(c.subject) ? c.subject : "Physics",
-    name:String(c.name||"").trim(),
-    total, lecDone, tasks
-  };
-}
 function syllabusData(){
   try{
-    const raw = localStorage.getItem(SYLLABUS_KEY)
-      || localStorage.getItem("370R_JEE_SYLLABUS_V3")
-      || localStorage.getItem("370R_JEE_SYLLABUS_V2")
-      || localStorage.getItem("370R_JEE_SYLLABUS_V1");
+    const raw = localStorage.getItem(SYLLABUS_KEY) || localStorage.getItem("370R_JEE_SYLLABUS_V2") || localStorage.getItem("370R_JEE_SYLLABUS_V1");
     const x = raw ? JSON.parse(raw) : {chapters:[]};
-    const chapters = Array.isArray(x.chapters) ? x.chapters.map(normaliseSyllabusChapter) : [];
-    return {version:4, chapters:chapters.filter(c=>c.name)};
-  }catch(e){ return {version:4,chapters:[]}; }
+    const chapters = Array.isArray(x.chapters) ? x.chapters : [];
+    return {version:3, chapters:chapters.map(c=>({
+      id:String(c.id || ("ch_"+Date.now()+Math.random().toString(36).slice(2))),
+      subject:SYLLABUS_SUBJECTS.includes(c.subject) ? c.subject : "Physics",
+      name:String(c.name||"").trim(),
+      total:Math.max(1,Math.min(100,parseInt(c.total,10)||1))
+    })).filter(c=>c.name)};
+  }catch(e){ return {version:3,chapters:[]}; }
 }
 function saveSyllabusData(d){ localStorage.setItem(SYLLABUS_KEY, JSON.stringify(d)); }
-
-function syllabusProgress(c){
-  return c.lecDone.filter(Boolean).length;
-}
-function renderLectureBoxes(c){
-  return `<div class="sy-lecture-boxes">${
-    c.lecDone.map((done,i)=>`
-      <button type="button" class="sy-lecture ${done?"checked":""}"
-        data-sy-lec="${escapeFeatureText(c.id)}" data-sy-lec-index="${i}"
-        title="Lecture ${i+1}">
-        <span class="sy-check"></span><small>${i+1}</small>
-      </button>`).join("")
-  }</div>`;
-}
-function renderTaskBox(c,key){
-  return `<button type="button" class="sy-task-box ${c.tasks[key]?"checked":""}"
-    data-sy-task="${escapeFeatureText(c.id)}" data-sy-task-key="${key}"
-    aria-label="${SYLLABUS_TASK_LABELS[key]}"></button>`;
-}
 function renderSyllabus(){
   const list=document.getElementById("syllabusList"); if(!list)return;
   const d=syllabusData();
-  if(!d.chapters.length){
-    list.innerHTML='<div class="sy-empty">No chapters yet. Add your first chapter above.</div>';
-    return;
-  }
+  if(!d.chapters.length){ list.innerHTML='<div class="sy-empty">No chapters yet. Add your first chapter above.</div>'; return; }
   const esc=s=>escapeFeatureText(s);
-
   list.innerHTML=SYLLABUS_SUBJECTS.map(subject=>{
-    const rows=d.chapters.filter(c=>c.subject===subject);
-    if(!rows.length)return "";
-    return `<section class="sy-subject">
-      <div class="sy-subject-head">
-        <h3>${esc(subject)}</h3><span>${rows.length} chapter${rows.length>1?'s':''}</span>
-      </div>
-      <div class="sy-pdf-table-wrap">
-        <table class="sy-pdf-table">
-          <thead><tr>
-            <th class="sy-col-no">#</th>
-            <th class="sy-col-name">Chapter Name</th>
-            <th class="sy-col-lec">Lecture Tracker</th>
-            <th class="sy-col-total">Total Lec</th>
-            <th class="sy-col-comp">Lec Comp</th>
-            <th>MAINS<br>LEVEL</th>
-            <th>ADV<br>LEVEL</th>
-            <th>SHORT<br>NOTES</th>
-            <th>DPP</th>
-            <th>HW</th>
-            <th class="sy-col-action">Action</th>
-          </tr></thead>
-          <tbody>
-            ${rows.map((c,i)=>`<tr>
-              <td class="sy-col-no">${i+1}</td>
-              <td class="sy-col-name"><b>${esc(c.name)}</b></td>
-              <td class="sy-col-lec">${renderLectureBoxes(c)}</td>
-              <td class="sy-col-total"><b>${c.total}</b></td>
-              <td class="sy-col-comp"><b>${syllabusProgress(c)}/${c.total}</b></td>
-              ${SYLLABUS_TASKS.map(k=>`<td>${renderTaskBox(c,k)}</td>`).join("")}
-              <td class="sy-col-action"><button class="sy-delete" data-sy-delete="${esc(c.id)}" type="button">Delete</button></td>
-            </tr>`).join("")}
-          </tbody>
-        </table>
-      </div>
-    </section>`;
+    const rows=d.chapters.filter(c=>c.subject===subject); if(!rows.length)return "";
+    return `<section class="sy-subject"><div class="sy-subject-head"><h3>${esc(subject)}</h3><span>${rows.length} chapter${rows.length>1?'s':''}</span></div><div class="sy-simple-table-wrap"><table class="sy-simple-table"><thead><tr><th>#</th><th>Chapter Name</th><th>Total Lectures</th><th>Action</th></tr></thead><tbody>${rows.map((c,i)=>`<tr><td>${i+1}</td><td>${esc(c.name)}</td><td>${c.total}</td><td><button class="sy-delete" data-sy-delete="${esc(c.id)}" type="button">Delete</button></td></tr>`).join("")}</tbody></table></div></section>`;
   }).join("");
 }
 function addSyllabusChapter(){
@@ -1341,12 +1267,7 @@ function addSyllabusChapter(){
     alert("Subject, Chapter Name aur Total Lectures (1–100) sahi se bharo."); return;
   }
   const d=syllabusData();
-  d.chapters.push({
-    id:"ch_"+Date.now()+"_"+Math.random().toString(36).slice(2),
-    subject,name,total,
-    lecDone:Array(total).fill(false),
-    tasks:Object.fromEntries(SYLLABUS_TASKS.map(k=>[k,false]))
-  });
+  d.chapters.push({id:"ch_"+Date.now()+"_"+Math.random().toString(36).slice(2),subject,name,total});
   saveSyllabusData(d); renderSyllabus();
   document.getElementById("syllabusChapterName").value="";
   document.getElementById("syllabusTotalLectures").value="";
@@ -1355,162 +1276,161 @@ function addSyllabusChapter(){
 function initSyllabus(){
   document.getElementById("syllabusAddBtn")?.addEventListener("click",addSyllabusChapter);
   document.getElementById("syllabusChapterName")?.addEventListener("keydown",e=>{if(e.key==="Enter")addSyllabusChapter();});
-
   document.getElementById("syllabusList")?.addEventListener("click",e=>{
-    const lec=e.target.closest("[data-sy-lec]");
-    if(lec){
-      const d=syllabusData();
-      const c=d.chapters.find(x=>x.id===lec.dataset.syLec);
-      const i=Number(lec.dataset.syLecIndex);
-      if(c && Number.isInteger(i) && i>=0 && i<c.total){
-        c.lecDone[i]=!c.lecDone[i]; saveSyllabusData(d); renderSyllabus();
-      }
-      return;
-    }
-    const task=e.target.closest("[data-sy-task]");
-    if(task){
-      const d=syllabusData();
-      const c=d.chapters.find(x=>x.id===task.dataset.syTask);
-      const key=task.dataset.syTaskKey;
-      if(c && SYLLABUS_TASKS.includes(key)){
-        c.tasks[key]=!c.tasks[key]; saveSyllabusData(d); renderSyllabus();
-      }
-      return;
-    }
-    const b=e.target.closest("[data-sy-delete]");
-    if(b){
-      const id=b.dataset.syDelete, d=syllabusData(), c=d.chapters.find(x=>x.id===id);
-      if(c && confirm(`Delete “${c.name}”?`)){
-        d.chapters=d.chapters.filter(x=>x.id!==id); saveSyllabusData(d); renderSyllabus();
-      }
-    }
+    const b=e.target.closest("[data-sy-delete]"); if(!b)return;
+    const id=b.dataset.syDelete, d=syllabusData(), c=d.chapters.find(x=>x.id===id); if(!c)return;
+    if(confirm(`Delete “${c.name}”?`)){d.chapters=d.chapters.filter(x=>x.id!==id);saveSyllabusData(d);renderSyllabus();}
   });
-
   document.getElementById("syllabusClearBtn")?.addEventListener("click",()=>{
     if(!syllabusData().chapters.length)return;
-    if(confirm("Clear the complete syllabus?")){
-      saveSyllabusData({version:4,chapters:[]}); renderSyllabus();
-    }
+    if(confirm("Clear the complete syllabus?")){saveSyllabusData({version:3,chapters:[]});renderSyllabus();}
   });
   document.getElementById("syllabusBackBtn")?.addEventListener("click",()=>openFeature("menu"));
   document.getElementById("syllabusPdfBtn")?.addEventListener("click",downloadSyllabusPDF);
   renderSyllabus();
 }
-function pdfBox(pdf,x,y,size=3.5,checked=false){
-  pdf.setDrawColor(0,0,0); pdf.setLineWidth(.35); pdf.rect(x,y,size,size);
-  if(checked){
-    pdf.setFillColor(0,0,0);
-    pdf.rect(x+.55,y+.55,size-1.1,size-1.1,"F");
-  }
-}
+function pdfBox(pdf,x,y,size=3.4){ pdf.setDrawColor(0,0,0); pdf.setLineWidth(0.45); pdf.rect(x,y,size,size); }
 function downloadSyllabusPDF(){
   const JsPDF=window.jspdf?.jsPDF || window.jsPDF;
   if(!JsPDF){alert("PDF library load nahi hui. Internet on karke page reload karo.");return;}
   const d=syllabusData();
   if(!d.chapters.length){alert("Pehle chapters add karo.");return;}
 
-  // Match the supplied syllabus-sheet appearance: compact portrait A4 table.
+  // Large syllabuses used to make one very heavy autoTable call. On phones
+  // that could stall jsPDF before the browser got a chance to download it.
+  // Build the PDF in small page-sized chunks instead.
   const pdf=new JsPDF({orientation:"portrait",unit:"mm",format:"a4",compress:true});
-  const M=6, pageW=210, usable=pageW-M*2;
-  const headers=["#","Chapter Name","Lecture Tracker","Total Lec","Lec Comp","MAINS\nLEVEL","ADV\nLEVEL","SHORT\nNOTES","DPP","HW"];
-  // Fits inside A4 portrait: 204mm total.
-  const widths=[7,42,48,12,11,17,15,18,15,19];
+  const M=7, pageW=210, pageH=297, usable=pageW-M*2;
+  const headers=["#","Chapter Name","Lecture Tracker","Total Lec","Lec Comp",...SYLLABUS_TASKS.map(k=>SYLLABUS_TASK_LABELS[k])];
+  // Portrait A4 has only 196 mm of usable width. Keep every column inside
+  // that boundary so the final columns (especially HW) never run off the page.
+  const widths=[5,38,45,9,7,...SYLLABUS_TASKS.map(()=>8)];
+
   let firstPage=true;
 
-  function drawPage(subject,chapters,startIndex){
-    if(!firstPage)pdf.addPage();
+  function drawPage(subject, chapters, startIndex){
+    if(!firstPage) pdf.addPage();
     firstPage=false;
 
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(15);
     pdf.setTextColor(0,0,0);
-    pdf.setFont("helvetica","bold"); pdf.setFontSize(13);
-    pdf.text("JEE SYLLABUS TRACKER",M,8.5);
-    pdf.setFont("helvetica","normal"); pdf.setFontSize(5.8);
-    pdf.text("Offline Printable • Tick by hand or use the boxes in the tracker",M,12);
-    pdf.setFont("helvetica","bold"); pdf.setFontSize(8.5);
-    pdf.text(subject.toUpperCase(),M,17);
+    pdf.text("JEE SYLLABUS TRACKER",M,9);
 
-    const body=chapters.map((c,i)=>[
-      String(startIndex+i+1),
-      c.name,
-      "",
-      String(c.total),
-      `${syllabusProgress(c)}/${c.total}`,
-      "","","","",""
+    pdf.setFont("helvetica","normal");
+    pdf.setFontSize(6.5);
+    pdf.text("Offline Printable • Tick everything by hand",M,13);
+
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(10.5);
+    pdf.text(subject.toUpperCase(),M,19);
+
+    const rows=chapters.map((c,i)=>[
+      String(startIndex+i+1), c.name, "", String(c.total), "",
+      ...SYLLABUS_TASKS.map(()=> "")
     ]);
 
     pdf.autoTable({
-      startY:20,
-      margin:{left:M,right:M,top:5,bottom:6},
+      startY:22,
+      margin:{left:M,right:M,top:6,bottom:7},
       tableWidth:usable,
       head:[headers],
-      body,
+      body:rows,
       theme:"grid",
       rowPageBreak:"avoid",
       styles:{
-        font:"helvetica",fontSize:5.5,cellPadding:1.0,
-        overflow:"linebreak",valign:"middle",halign:"center",
-        lineWidth:.35,lineColor:[0,0,0],textColor:[0,0,0]
+        font:"helvetica",fontSize:6.4,cellPadding:1.2,overflow:"linebreak",
+        valign:"middle",halign:"center",lineWidth:0.45,
+        lineColor:[0,0,0],textColor:[0,0,0]
       },
       headStyles:{
-        fontStyle:"bold",fontSize:5.2,fillColor:[255,255,255],
-        textColor:[0,0,0],halign:"center",valign:"middle",
-        cellPadding:1.0
+        fontStyle:"bold",fontSize:6.2,halign:"center",valign:"middle",
+        fillColor:[255,255,255],textColor:[0,0,0],cellPadding:1.2
       },
-      columnStyles:Object.fromEntries(widths.map((w,i)=>[
-        i,{cellWidth:w,halign:i===1?"left":"center",
-           fontSize:i===1?7.2:(i===3?6.8:5.5),
-           fontStyle:i===1||i===3?"bold":"normal"}
-      ])),
+      columnStyles:Object.fromEntries(
+        widths.map((w,i)=>[
+          i,{cellWidth:w,halign:i===1?"left":"center",
+          fontSize:i===1?7.8:(i===3?6.8:5.1),fontStyle:i===1||i===3?"bold":"normal"}
+        ])
+      ),
       didParseCell:data=>{
-        if(data.section!=="body")return;
-        const c=chapters[data.row.index];
-        const lectureLines=Math.ceil(c.total/5);
-        data.cell.styles.minCellHeight=Math.max(9,lectureLines*5.5+2.5);
+        if(data.section==="body" && data.column.index===2){
+          const total=chapters[data.row.index].total;
+          const lines=Math.ceil(total/4);
+          data.cell.styles.minCellHeight=Math.max(8,lines*6.0+1.5);
+        }
       },
       didDrawCell:data=>{
         if(data.section!=="body")return;
-        const c=chapters[data.row.index];
 
         if(data.column.index===2){
-          const perLine=5, box=3.4, step=8.3, lineH=5.5;
-          for(let n=0;n<c.total;n++){
-            const line=Math.floor(n/perLine),pos=n%perLine;
-            const x=data.cell.x+1.3+pos*step;
-            const y=data.cell.y+1.1+line*lineH;
-            if(y+box>data.cell.y+data.cell.height-.4)continue;
-            pdfBox(pdf,x,y,box,!!c.lecDone[n]);
-            pdf.setFont("helvetica","normal");pdf.setFontSize(3.7);pdf.setTextColor(0,0,0);
-            pdf.text(String(n+1),x+4.0,y+2.5);
+          const total=chapters[data.row.index].total;
+          const perLine=5, box=2.8, step=8.4, lineH=5.0;
+
+          for(let n=0;n<total;n++){
+            const line=Math.floor(n/perLine), pos=n%perLine;
+            const x=data.cell.x+1.0+pos*step;
+            const y=data.cell.y+0.9+line*lineH;
+            if(y+box>data.cell.y+data.cell.height-0.3)continue;
+
+            pdfBox(pdf,x,y,box);
+            pdf.setFont("helvetica","normal");
+            pdf.setFontSize(3.5);
+            pdf.setTextColor(0,0,0);
+            pdf.text(String(n+1),x+3.5,y+2.1);
           }
         }
 
-        if(data.column.index>=5 && data.column.index<=9){
-          const key=SYLLABUS_TASKS[data.column.index-5];
-          const box=4.1;
-          const x=data.cell.x+(data.cell.width-box)/2;
-          const y=data.cell.y+(data.cell.height-box)/2;
-          pdfBox(pdf,x,y,box,!!c.tasks[key]);
+        if(data.column.index>=5){
+          const box=3.0;
+          pdfBox(
+            pdf,
+            data.cell.x+(data.cell.width-box)/2,
+            data.cell.y+(data.cell.height-box)/2,
+            box
+          );
         }
       }
     });
   }
 
-  // Keep pages readable on mobile-generated PDFs.
-  for(const subject of SYLLABUS_SUBJECTS){
-    const chapters=d.chapters.filter(c=>c.subject===subject);
-    if(!chapters.length)continue;
-    let chunk=[],used=0,startIndex=0;
-    chapters.forEach((c,index)=>{
-      const h=Math.max(9,Math.ceil(c.total/5)*5.5+2.5);
-      if(chunk.length && used+h>255){
-        drawPage(subject,chunk,startIndex);
-        startIndex=index;chunk=[];used=0;
-      }
-      chunk.push(c);used+=h;
-      if(index===chapters.length-1)drawPage(subject,chunk,startIndex);
-    });
+  try{
+    // Keep each autoTable call comfortably within one A4 page's worth of rows.
+    // A chapter with up to 100 lectures still fits as a single row.
+    const MAX_BODY_HEIGHT=270;
+
+    for(const subject of SYLLABUS_SUBJECTS){
+      const chapters=d.chapters.filter(c=>c.subject===subject);
+      if(!chapters.length) continue;
+
+      // Target layout: one clean A4 portrait page per subject, matching
+      // the reference syllabus sheet (Physics / Chemistry / Mathematics).
+      // If a custom syllabus is unusually large, split only that subject.
+      let chunk=[];
+      let used=0;
+      let startIndex=0;
+
+      chapters.forEach((chapter,index)=>{
+        const h=Math.max(8,Math.ceil(chapter.total/5)*5.0+1.5);
+        if(chunk.length && used+h>MAX_BODY_HEIGHT){
+          drawPage(subject,chunk,startIndex);
+          startIndex=index;
+          chunk=[];
+          used=0;
+        }
+        chunk.push(chapter);
+        used+=h;
+        if(index===chapters.length-1 && chunk.length){
+          drawPage(subject,chunk,startIndex);
+        }
+      });
+    }
+
+    pdf.save("JEE-Syllabus-Tracker-A4-Portrait.pdf");
+  }catch(e){
+    console.error("Syllabus PDF generation failed:",e);
+    alert("PDF generate nahi ho paaya. Data safe hai — chapters/lectures delete nahi hue. Page reload karke dobara try karo.");
   }
-  pdf.save("JEE-Syllabus-Tracker-A4.pdf");
 }
 
 /* ---------- Start ---------- */
